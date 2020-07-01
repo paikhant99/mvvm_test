@@ -13,6 +13,10 @@ public class Text {
     @ColumnInfo(name = "sentence")
     private String sentence;
 
+    public Text(String sentence) {
+        this.sentence = sentence;
+    }
+
     public int getId() {
         return id;
     }
