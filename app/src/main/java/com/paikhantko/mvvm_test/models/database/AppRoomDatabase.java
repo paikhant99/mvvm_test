@@ -6,28 +6,30 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.paikhantko.mvvm_test.models.daos.TextDao;
-import com.paikhantko.mvvm_test.models.entities.Text;
+import com.paikhantko.mvvm_test.models.daos.DataDao;
+import com.paikhantko.mvvm_test.models.entities.Row;
+import com.paikhantko.mvvm_test.utils.AppConstants;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Text.class}, version = 1, exportSchema = false)
-public abstract class TextRoomDatabase extends RoomDatabase {
+@Database(entities = {Row.class}, version = 1, exportSchema = false)
+public abstract class AppRoomDatabase extends RoomDatabase {
 
-    public abstract TextDao textDao();
+    //    public abstract TextDao textDao();
+    public abstract DataDao rowDao();
 
-    private static volatile TextRoomDatabase INSTANCE;
+    private static volatile AppRoomDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
     public static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
-    public static TextRoomDatabase getDatabase(final Context context) {
+    public static AppRoomDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
-            synchronized (TextRoomDatabase.class) {
+            synchronized (AppRoomDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            TextRoomDatabase.class, "text_database")
+                            AppRoomDatabase.class, AppConstants.DATABASE_NAME)
                             .build();
                 }
             }

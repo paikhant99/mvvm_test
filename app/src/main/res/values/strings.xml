@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">MVVM_test</string>
-    <string name="text_input_dialog_name">Insert Text</string>
-    <string name="text_input_dialog_save_btn_name">Save</string>
-    <string name="text_input_dialog_cancel_btn_name">Cancel</string>
+    <string name="total_recovered_label_item_name">Total Recovered : %1$s</string>
+    <string name="total_death_label_item_name">Total Death : %1$s</string>
 </resources>
