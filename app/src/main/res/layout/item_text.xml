@@ -1,33 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/margin_small">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout
+    <data>
+        <variable
+            name="row"
+            type="com.paikhantko.mvvm_test.models.entities.Row" />
+    </data>
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="@dimen/margin_medium">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_small">
 
-        <TextView
-            android:id="@+id/tv_country"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/font_title_medium" />
-        <TextView
-            android:id="@+id/tv_total_recovered"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/font_normal"
-            android:textColor="@android:color/holo_green_light"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="70dp"
+                android:src="@{row.flag}"
+                android:contentDescription="@{@string/flag_image_content_name(row.country)}"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/margin_medium"/>
 
-        <TextView
-            android:id="@+id/tv_total_death"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/font_normal"
-            android:textColor="@android:color/holo_red_light"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="@dimen/margin_medium">
 
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+                <TextView
+                    android:id="@+id/tv_country"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{row.country}"
+                    android:textSize="@dimen/font_title_medium" />
+
+                <TextView
+                    android:id="@+id/tv_total_recovered"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_normal"
+                    android:text="@{@string/total_recovered_label_item_name(row.totalRecovered)}"
+                    android:textColor="@android:color/holo_green_light" />
+
+                <TextView
+                    android:id="@+id/tv_total_death"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_normal"
+                    android:text="@{@string/total_death_label_item_name(row.totalDeaths)}"
+                    android:textColor="@android:color/holo_red_light" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

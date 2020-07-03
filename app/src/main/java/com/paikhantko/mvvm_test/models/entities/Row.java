@@ -52,4 +52,92 @@ public class Row {
     @SerializedName("total_recovered")
     private String totalRecovered;
 
+    @NonNull
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(@NonNull String country) {
+        this.country = country;
+    }
+
+    public String getActiveCases() {
+        return activeCases;
+    }
+
+    public void setActiveCases(String activeCases) {
+        this.activeCases = activeCases;
+    }
+
+    public String getCasesPerMillPop() {
+        return casesPerMillPop;
+    }
+
+    public void setCasesPerMillPop(String casesPerMillPop) {
+        this.casesPerMillPop = casesPerMillPop;
+    }
+
+    public String getCountryAbbreviation() {
+        return countryAbbreviation;
+    }
+
+    public void setCountryAbbreviation(String countryAbbreviation) {
+        this.countryAbbreviation = countryAbbreviation;
+    }
+
+    public String getFlag() {
+        return flag;
+    }
+
+    public void setFlag(String flag) {
+        this.flag = flag;
+    }
+
+    public String getNewCases() {
+        return newCases;
+    }
+
+    public void setNewCases(String newCases) {
+        this.newCases = newCases;
+    }
+
+    public String getNewDeaths() {
+        return newDeaths;
+    }
+
+    public void setNewDeaths(String newDeaths) {
+        this.newDeaths = newDeaths;
+    }
+
+    public String getSeriousCritical() {
+        return seriousCritical;
+    }
+
+    public void setSeriousCritical(String seriousCritical) {
+        this.seriousCritical = seriousCritical;
+    }
+
+    public String getTotalCases() {
+        return totalCases;
+    }
+
+    public void setTotalCases(String totalCases) {
+        this.totalCases = totalCases;
+    }
+
+    public String getTotalDeaths() {
+        return totalDeaths;
+    }
+
+    public void setTotalDeaths(String totalDeaths) {
+        this.totalDeaths = totalDeaths;
+    }
+
+    public String getTotalRecovered() {
+        return totalRecovered;
+    }
+
+    public void setTotalRecovered(String totalRecovered) {
+        this.totalRecovered = totalRecovered;
+    }
 }

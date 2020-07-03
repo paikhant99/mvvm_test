@@ -3,7 +3,7 @@ package com.paikhantko.mvvm_test.models.network;
 
 import com.paikhantko.mvvm_test.models.entities.*;
 
-import retrofit2.Call;
+import io.reactivex.Single;
 
 public class RemoteDataSource {
     private static RemoteDataSource INSTANCE;
@@ -19,7 +19,7 @@ public class RemoteDataSource {
         return INSTANCE;
     }
 
-    public Call<Covid19Response> getCovid19Response(){
+    public Single<Covid19Response> getCovid19Response(){
         return mApiService.getData();
     }
 }

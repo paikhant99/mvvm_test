@@ -1,6 +1,5 @@
 package com.paikhantko.mvvm_test.models.daos;
 
-import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -10,11 +9,13 @@ import com.paikhantko.mvvm_test.models.entities.Row;
 
 import java.util.List;
 
+import io.reactivex.Maybe;
+
 @Dao
 public interface DataDao {
 
     @Query("Select * from row_table")
-    LiveData<List<Row>> getData();
+    Maybe<List<Row>> getData();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertRow(Row row);

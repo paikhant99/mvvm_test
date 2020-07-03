@@ -1,14 +1,17 @@
 package com.paikhantko.mvvm_test.ui.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.BindingAdapter;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.paikhantko.mvvm_test.BR;
 import com.paikhantko.mvvm_test.R;
 import com.paikhantko.mvvm_test.models.entities.Row;
 
@@ -16,29 +19,26 @@ import java.util.List;
 
 public class RowsAdapter extends RecyclerView.Adapter<RowsAdapter.RowViewHolder> {
 
-    private final Context mContext;
     private List<Row> mRows;
 
 
-    public RowsAdapter(Context context, List<Row> rows) {
-        this.mContext = context;
+    public RowsAdapter(List<Row> rows) {
         this.mRows = rows;
     }
 
     @NonNull
     @Override
     public RowViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_text, parent, false);
-        return new RowViewHolder(view);
+        LayoutInflater inflater=LayoutInflater.from(parent.getContext());
+        ViewDataBinding dataBinding=DataBindingUtil.inflate(inflater,R.layout.item_text,parent,false);
+        return new RowViewHolder(dataBinding);
     }
 
 
     @Override
     public void onBindViewHolder(@NonNull RowViewHolder holder, int position) {
-
-        holder.tvCountry.setText(mRows.get(position).getCountry());
-        holder.tvTotalRecovered.setText(mContext.getResources().getString(R.string.total_recovered_label_item_name,mRows.get(position).getTotalRecovered()));
-        holder.tvTotalDeath.setText(mContext.getResources().getString(R.string.total_death_label_item_name,mRows.get(position).getNewDeaths()));
+        holder.binding.setVariable(BR.row,mRows.get(position));
+        holder.binding.executePendingBindings();
     }
 
     @Override
@@ -51,18 +51,19 @@ public class RowsAdapter extends RecyclerView.Adapter<RowsAdapter.RowViewHolder>
         notifyDataSetChanged();
     }
 
+    @BindingAdapter("android:src")
+    public static void setImageUrl(ImageView view, String flag) {
+        Glide.with(view.getContext())
+                .load(flag)
+                .into(view);
+    }
+
     static class RowViewHolder extends RecyclerView.ViewHolder {
-        TextView tvCountry, tvTotalRecovered, tvTotalDeath;
+        final ViewDataBinding binding;
 
-        public RowViewHolder(@NonNull View itemView) {
-            super(itemView);
-            initiateViewIds();
-        }
-
-        private void initiateViewIds() {
-            tvCountry = itemView.findViewById(R.id.tv_country);
-            tvTotalDeath = itemView.findViewById(R.id.tv_total_death);
-            tvTotalRecovered = itemView.findViewById(R.id.tv_total_recovered);
+        public RowViewHolder(ViewDataBinding binding) {
+            super(binding.getRoot());
+            this.binding=binding;
         }
 
     }
