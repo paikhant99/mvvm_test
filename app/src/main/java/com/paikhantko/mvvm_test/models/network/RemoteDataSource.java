@@ -3,20 +3,17 @@ package com.paikhantko.mvvm_test.models.network;
 
 import com.paikhantko.mvvm_test.models.entities.*;
 
+import javax.inject.Inject;
+
 import io.reactivex.Single;
 
 public class RemoteDataSource {
-    private static RemoteDataSource INSTANCE;
-    private final ApiService mApiService= RetrofitInstance.getInstance().create(ApiService.class);
 
-    private RemoteDataSource() {
-    }
+    private final ApiService mApiService;
 
-    public static RemoteDataSource getRemoteDataSourceInstance(){
-        if(INSTANCE==null){
-            INSTANCE=new RemoteDataSource();
-        }
-        return INSTANCE;
+    @Inject
+    public RemoteDataSource(ApiService apiService) { //need to add @Inject
+        this.mApiService=apiService;
     }
 
     public Single<Covid19Response> getCovid19Response(){

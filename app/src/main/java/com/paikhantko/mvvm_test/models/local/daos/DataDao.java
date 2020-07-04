@@ -1,4 +1,4 @@
-package com.paikhantko.mvvm_test.models.daos;
+package com.paikhantko.mvvm_test.models.local.daos;
 
 import androidx.room.Dao;
 import androidx.room.Insert;

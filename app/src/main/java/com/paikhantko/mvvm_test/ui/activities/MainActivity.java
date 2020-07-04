@@ -7,33 +7,37 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 
+import com.paikhantko.mvvm_test.App;
 import com.paikhantko.mvvm_test.R;
 import com.paikhantko.mvvm_test.controller.viewmodels.MainViewModel;
-import com.paikhantko.mvvm_test.controller.viewmodels.MainViewModelFactory;
 import com.paikhantko.mvvm_test.databinding.ActivityMainBinding;
 import com.paikhantko.mvvm_test.ui.adapter.RowsAdapter;
-import com.paikhantko.mvvm_test.ui.delegates.TextInputDialogDelegate;
-import com.paikhantko.mvvm_test.ui.delegates.TextsItemDelegate;
-import com.paikhantko.mvvm_test.utils.InjectorUtils;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
+import javax.inject.Inject;
 
-public class MainActivity extends AppCompatActivity implements TextInputDialogDelegate, TextsItemDelegate {
+
+public class MainActivity extends AppCompatActivity {
+
+    @Inject
+    ViewModelProvider.Factory viewmodelfactory;
+    MainViewModel mainViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ((App) getApplication()).getAppComponent().inject(this);
         super.onCreate(savedInstanceState);
         ActivityMainBinding binding=DataBindingUtil.setContentView(this,R.layout.activity_main);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        MainViewModelFactory factory = InjectorUtils.provideMainViewModelFactory(getApplication());
-        MainViewModel mViewModel = new ViewModelProvider(this, factory).get(MainViewModel.class);
+
+        mainViewModel=viewmodelfactory.create(MainViewModel.class);
 
         binding.rvText.setAdapter(new RowsAdapter(new ArrayList<>()));
-        binding.setViewmodel(mViewModel);
+        binding.setViewmodel(mainViewModel);
 
         binding.getViewmodel().loadData().observe(this, rows -> ((RowsAdapter) Objects.requireNonNull(binding.rvText.getAdapter())).setRows(rows));
     }

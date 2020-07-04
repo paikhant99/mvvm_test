@@ -14,6 +14,8 @@ import com.paikhantko.mvvm_test.models.entities.Row;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 
 public class MainViewModel extends AndroidViewModel {
 
@@ -21,6 +23,7 @@ public class MainViewModel extends AndroidViewModel {
     private final MutableLiveData<List<Row>> rowList;
     private ObservableField<Boolean> isLoading;
 
+    @Inject
     public MainViewModel(@NonNull Application application, Covid19Repository covid19Repository) {
         super(application);
         this.repo = covid19Repository;
